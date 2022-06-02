@@ -25,4 +25,21 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/classrooms', function () {
+        return view('dashboard');
+    })->name('classrooms');
+
+    Route::get('/lessons', function () {
+        return view('dashboard');
+    })->name('lessons');
+
+    Route::get('/exams', function () {
+        return view('dashboard');
+    })->name('exams');
+
+    Route::get('/activities', function () {
+        return view('dashboard');
+    })->name('activities');
+    
 });

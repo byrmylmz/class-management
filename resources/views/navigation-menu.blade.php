@@ -16,7 +16,33 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('classrooms') }}" :active="request()->routeIs('classrooms')">
+                        {{ __('Derslikler') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('lessons') }}" :active="request()->routeIs('lessons')">
+                        {{ __('Dersler') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('exams') }}" :active="request()->routeIs('exams')">
+                        {{ __('Sınavlar') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('activities') }}" :active="request()->routeIs('activities')">
+                        {{ __('Etkinlikler') }}
+                    </x-jet-nav-link>
+                </div>
+
             </div>
+            
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
