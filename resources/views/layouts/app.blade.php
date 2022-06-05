@@ -13,10 +13,15 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-        @livewireStyles
-
+        @livewireStyles 
+       
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.css' rel='stylesheet' />   
+        @livewire('livewire-ui-modal')
+
+        
+        
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
@@ -40,7 +45,10 @@
         </div>
 
         @stack('modals')
-
         @livewireScripts
+        
+            @stack('scripts')
+            <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.js'></script>
+
     </body>
 </html>

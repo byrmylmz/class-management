@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClassroomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/powergrid', 'powergrid-demo');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -26,9 +29,18 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/classrooms', function () {
-        return view('dashboard');
-    })->name('classrooms');
+    //Classroom
+    // Route::get('/classrooms', function () {
+    //     return view('class');
+    // })->name('classrooms');
+
+    Route::Get('/classroom',[ClassroomController::class,'index'])->name('classroom');
+    Route::Get('/classroom/show/{classroom}',[ClassroomController::class,'show'])->name('classroom.show');
+    Route::Get('/classroom/create',[ClassroomController::class,'create'])->name('classroom.create');
+    Route::Get('/classroom/edit/{classroom}',[ClassroomController::class,'edit'])->name('classroom.edit');
+    Route::Post('/classroom',[ClassroomController::class,'store'])->name('classroom.store');
+    Route::Put('/classroom/{classroom}',[ClassroomController::class,'update'])->name('classroom.update');
+    Route::Delete('/classroom/{classroom}',[ClassroomController::class,'destroy'])->name('classroom.destroy');
 
     Route::get('/lessons', function () {
         return view('dashboard');

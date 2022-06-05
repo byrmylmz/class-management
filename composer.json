@@ -1,4 +1,4 @@
-{
+{   
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
@@ -11,7 +11,11 @@
         "laravel/jetstream": "^2.8",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
-        "livewire/livewire": "^2.5"
+        "livewire/livewire": "^2.5",
+        "power-components/livewire-powergrid": "^3.0",
+        "rappasoft/laravel-livewire-tables": "^2.7",
+        "wire-elements/modal": "^1.0",
+        "wireui/wireui": "^1.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -61,3 +65,4 @@
     "minimum-stability": "dev",
     "prefer-stable": true
 }
+

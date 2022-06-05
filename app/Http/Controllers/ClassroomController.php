@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClassroomPostRequest;
 use App\Models\Classroom;
 use Illuminate\Http\Request;
+use Datatables;
+
 
 class ClassroomController extends Controller
 {
@@ -14,7 +17,8 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        //
+        $events=[]; 
+        return view('classroom.index',compact($events));
     }
 
     /**
@@ -24,7 +28,7 @@ class ClassroomController extends Controller
      */
     public function create()
     {
-        //
+        return view('classroom.create');
     }
 
     /**
@@ -33,9 +37,12 @@ class ClassroomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(ClassroomPostRequest $request)
+    {   
+      
+        
+        Classroom::create($request->all());
+        return redirect()->route('classroom');
     }
 
     /**
@@ -46,7 +53,7 @@ class ClassroomController extends Controller
      */
     public function show(Classroom $classroom)
     {
-        //
+        return view('classroom.show',compact('classroom'));
     }
 
     /**
@@ -57,7 +64,7 @@ class ClassroomController extends Controller
      */
     public function edit(Classroom $classroom)
     {
-        //
+        return view('classroom.edit',compact('classroom'));
     }
 
     /**
@@ -69,7 +76,11 @@ class ClassroomController extends Controller
      */
     public function update(Request $request, Classroom $classroom)
     {
-        //
+        $classroom->update([
+            'classroom_name'=>$request->classroom_name,
+            'classroom_number'=>$request->classroom_number
+        ]);
+        return redirect('classroom');
     }
 
     /**
@@ -80,6 +91,9 @@ class ClassroomController extends Controller
      */
     public function destroy(Classroom $classroom)
     {
-        //
+        $classroom->delete();
+        return redirect()->route('classroom');
     }
+
+
 }
