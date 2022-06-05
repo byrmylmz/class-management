@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
     events: [
             { // this object will be "parsed" into an Event Object
             title: 'test', // a property!
-            start: '2022-06-01', // a property!
-            end: '2022-06-01' // a property! ** see important note below about 'end' **
+            start: '2022-06-05', // a property!
+            end: '2022-06-05' // a property! ** see important note below about 'end' **
             }
         ],
         
@@ -51,41 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
-<style>
 
-    #external-events {
-        float:left;
-        position: static;
-        width: 15%;
-        padding: 0 10px;
-        border: 1px solid #ccc;
-        background: #eee;
-    }
-
-    .demo-topbar + #external-events { /* will get stripped out */
-        top: 60px;
-    }
-
-    #external-events .fc-event {
-        cursor: move;
-        margin: 3px 0;
-    }
-
-    #calendar-container {
-        width: 85%;
-        display: inline-block;
-        padding-left: 15px;
-        margin-top:-15px;
-        position: static;
-    }
-
-    #calendar {
-        
-    }
-
-    </style>
-
-@endpush
         
 </div>
 
