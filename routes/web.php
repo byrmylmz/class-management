@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\LessonController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,15 +26,12 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
+
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-
-    //Classroom
-    // Route::get('/classrooms', function () {
-    //     return view('class');
-    // })->name('classrooms');
-
+    
+    // Classroom
     Route::Get('/classroom',[ClassroomController::class,'index'])->name('classroom');
     Route::Get('/classroom/show/{classroom}',[ClassroomController::class,'show'])->name('classroom.show');
     Route::Get('/classroom/create',[ClassroomController::class,'create'])->name('classroom.create');
@@ -42,16 +40,25 @@ Route::middleware([
     Route::Put('/classroom/{classroom}',[ClassroomController::class,'update'])->name('classroom.update');
     Route::Delete('/classroom/{classroom}',[ClassroomController::class,'destroy'])->name('classroom.destroy');
 
-    Route::get('/lessons', function () {
-        return view('dashboard');
-    })->name('lessons');
+    // Lesson
+    Route::Get('/lesson',[LessonController::class,'index'])->name('lesson');
+    Route::Get('/lesson/show/{lesson}',[LessonController::class,'show'])->name('lesson.show');
+    Route::Get('/lesson/create',[LessonController::class,'create'])->name('lesson.create');
+    Route::Get('/lesson/assign',[LessonController::class,'assign'])->name('lesson.assign');
+    Route::Get('/lesson/edit/{lesson}',[LessonController::class,'edit'])->name('lesson.edit');
+    Route::Post('/lesson',[LessonController::class,'store'])->name('lesson.store');
+    Route::Put('/lesson/{lesson}',[LessonController::class,'update'])->name('lesson.update');
+    Route::Delete('/lesson/{lesson}',[LessonController::class,'destroy'])->name('lesson.destroy');
 
-    Route::get('/exams', function () {
-        return view('dashboard');
-    })->name('exams');
+    //calendar source
+    Route::Get('/source',[LessonController::class,'source'])->name('source');
 
-    Route::get('/activities', function () {
+    Route::get('/exam', function () {
         return view('dashboard');
-    })->name('activities');
+    })->name('exam');
+
+    Route::get('/activity', function () {
+        return view('dashboard');
+    })->name('activity');
     
 });

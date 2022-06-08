@@ -2,16 +2,15 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Classroom;
+use App\Models\Lesson;
 use Illuminate\Support\Carbon;
-
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
-final class TestTable extends PowerGridComponent
+final class LessonTable extends PowerGridComponent
 {
     use ActionButton;
 
@@ -25,7 +24,6 @@ final class TestTable extends PowerGridComponent
     public function setUp(): array
     {
         $this->showCheckBox();
-        
 
         return [
             Exportable::make('export')
@@ -37,8 +35,6 @@ final class TestTable extends PowerGridComponent
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
-            
-
         ];
     }
 
@@ -53,11 +49,11 @@ final class TestTable extends PowerGridComponent
     /**
     * PowerGrid datasource.
     *
-    * @return Builder<\App\Models\Classroom>
+    * @return Builder<\App\Models\Lesson>
     */
     public function datasource(): Builder
     {
-        return Classroom::query();
+        return Lesson::query();
     }
 
     /*
@@ -90,12 +86,12 @@ final class TestTable extends PowerGridComponent
     {
         return PowerGrid::eloquent()
             ->addColumn('id')
-            ->addColumn('classroom_name')
-            ->addColumn('classroom_number')
-            ->addColumn('updated_at')
-            ->addColumn('updated_at_formatted', fn (Classroom $model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'))
-            ->addColumn('created_at')
-            ->addColumn('created_at_formatted', fn (Classroom $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
+            ->addColumn('Fakülte')
+            ->addColumn('Bölüm')
+            ->addColumn('Ders Kodu')
+            ->addColumn('Ders Adı')
+            ->addColumn('1. Öğretim Elemanı')
+            ->addColumn('2. Öğretim Elemanı');
     }
 
     /*
@@ -119,25 +115,31 @@ final class TestTable extends PowerGridComponent
                 ->searchable()
                 ->sortable(),
 
-            Column::make('Derslik', 'classroom_name')
+            Column::make('Fakülte', 'faculty')
                 ->searchable()
                 ->sortable(),
 
-            Column::make('Derslik No', 'classroom_number')
+            Column::make('Bölüm', 'department')
                 ->searchable()
                 ->sortable(),
 
-            Column::make('Updated at', 'updated_at')
-                ->hidden(),
-
-            Column::make('Update at', 'updated_at_formatted', 'updated_at')
-                ->searchable(),
-
-            Column::make('Created at', 'created_at')
-                ->hidden(),
-
-            Column::make('Created at', 'created_at_formatted', 'created_at')
+            Column::make('Ders Kodu', 'code')
                 ->searchable()
+                ->sortable(),
+
+            Column::make('Ders Adı', 'name')
+                ->searchable()
+                ->sortable()
+                ->bodyAttribute(''),
+
+            Column::make('1. Öğretim Elemanı', 'first_teacher')
+                ->searchable()
+                ->sortable(),
+
+            Column::make('2. Öğretim Elemanı', 'second_teacher')
+                ->searchable()
+                ->sortable(),
+
         ];
     }
 
@@ -150,28 +152,25 @@ final class TestTable extends PowerGridComponent
     */
 
      /**
-     * PowerGrid Classroom Action Buttons.
+     * PowerGrid Lesson Action Buttons.
      *
      * @return array<int, Button>
      */
 
-    
     public function actions(): array
     {
        return [
             Button::make('edit', 'Düzenle')
                ->class('bg-indigo-500 hover:bg-indigo-600 cursor-pointer text-white px-3 py-1  rounded-md text-md')
-               ->route('classroom.edit', ['classroom' => 'id'])
+               ->route('lesson.edit', ['lesson' => 'id'])
                ->target('_self'),
-               
-               Button::make('detay', 'Detay')
+
+            Button::make('detay', 'Detay')
                ->class('bg-purple-500 hover:bg-purple-600 cursor-pointer text-white px-3 py-1 text-md rounded-md')
-               ->route('classroom.show',['classroom'=>'id'])
-               ->target('_self'),
+               ->route('lesson.show',['lesson'=>'id']),
 
         ];
     }
-    
 
     /*
     |--------------------------------------------------------------------------
@@ -182,7 +181,7 @@ final class TestTable extends PowerGridComponent
     */
 
      /**
-     * PowerGrid Classroom Action Rules.
+     * PowerGrid Lesson Action Rules.
      *
      * @return array<int, RuleActions>
      */
@@ -192,9 +191,9 @@ final class TestTable extends PowerGridComponent
     {
        return [
 
-           Hide button edit for ID 1
+           //Hide button edit for ID 1
             Rule::button('edit')
-                ->when(fn($classroom) => $classroom->id === 1)
+                ->when(fn($lesson) => $lesson->id === 1)
                 ->hide(),
         ];
     }
@@ -208,10 +207,10 @@ final class TestTable extends PowerGridComponent
             Button::add('Sil')
                 ->caption('Sil')
                 ->class('cursor-pointer block hover:bg-gray-100 px-2 py-1.5 text-gray-600 font-semibold border rounded')
-                ->emit('bulkSoldOutEvent', []),
+                ->emit('delete', []),
             
-            Button::add('yeni-derslik')
-                ->caption('Yeni Derslik')
+            Button::add('yeni-ders')
+                ->caption('Yeni Ders')
                 ->class('cursor-pointer block hover:bg-gray-100 border text-gray-600 font-semibold px-2 py-1.5 rounded')
                 ->openModal('edit-user', []),
 
@@ -226,13 +225,11 @@ final class TestTable extends PowerGridComponent
     {
         return array_merge(
             parent::getListeners(), [
-                'eventX',
-                'eventY',
-                'bulkSoldOutEvent',
+                'delete',
             ]);
     }
 
-    public function bulkSoldOutEvent(): void
+    public function delete(): void
     {
         if (count($this->checkboxValues) == 0) {
             $this->dispatchBrowserEvent('showAlert', ['message' => 'You must select at least one item!']);
@@ -245,14 +242,18 @@ final class TestTable extends PowerGridComponent
 
         if(count($this->checkboxValues)>1){
             foreach($this->checkboxValues as $id){
-                Classroom::find($id)->delete();
+                Lesson::find($id)->delete();
             }
         }else{
             // dd($this->checkboxValues);
-            Classroom::find($this->checkboxValues[0])->delete();
+            Lesson::find($this->checkboxValues[0])->delete();
         }
        
          $this->checkboxValues=[];
        
     }
+
+
+
+    
 }

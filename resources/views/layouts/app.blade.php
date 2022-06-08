@@ -6,6 +6,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        
+        <wireui:scripts />
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -17,8 +19,13 @@
        
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
-        <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.css' rel='stylesheet' />   
+        {{-- Calendar --}}
+        <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.css' rel='stylesheet' /> 
+        {{-- Live wire Modal --}}
         @livewire('livewire-ui-modal')
+        {{-- wireui script --}}
+      
+
 
         
         
@@ -47,8 +54,9 @@
         @stack('modals')
         @livewireScripts
         
-            @stack('scripts')
-            <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.js'></script>
+        
+        @stack('scripts')
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.js'></script>
 
     </body>
 </html>

@@ -3,7 +3,7 @@
   <div id='calendar-container' wire:ignore>
     <div id='calendar'></div>
   </div>
-</div>
+
 
 
 
@@ -25,25 +25,12 @@ document.addEventListener('DOMContentLoaded', function() {
     initialView: 'timeGridWeek',
     editable: true,
     droppable: true, // this allows things to be dropped onto the calendar
-
-    events: [
-            { // this object will be "parsed" into an Event Object
-            title: 'test', // a property!
-            start: '2022-06-05', // a property!
-            end: '2022-06-05' // a property! ** see important note below about 'end' **
-            }
-        ],
+    events:'/source'
+   
         
     });
 
-     calendar.addEventSource( {
-            url: '/calendar/events',
-            extraParams: function() {
-                return {
-                    name: @this.name
-                };
-            }
-        });
+  
 
 
     calendar.render();
@@ -52,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 
-        
-</div>
+</div> 
 
        

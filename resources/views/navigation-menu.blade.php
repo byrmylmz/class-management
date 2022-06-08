@@ -24,20 +24,32 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('lessons') }}" :active="request()->routeIs('lessons')">
+                    <x-jet-nav-link href="{{ route('lesson') }}" :active="request()->routeIs('lesson')">
                         {{ __('Dersler') }}
                     </x-jet-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('exams') }}" :active="request()->routeIs('exams')">
+                    <x-jet-nav-link href="{{ route('exam') }}" :active="request()->routeIs('exam')">
                         {{ __('Sınavlar') }}
                     </x-jet-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('activities') }}" :active="request()->routeIs('activities')">
+                    <x-jet-nav-link href="{{ route('activity') }}" :active="request()->routeIs('activity')">
                         {{ __('Etkinlikler') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('activity') }}" :active="request()->routeIs('activity')">
+                        {{ __('Fakülteler') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('activity') }}" :active="request()->routeIs('activity')">
+                        {{ __('Bölümler') }}
                     </x-jet-nav-link>
                 </div>
 
