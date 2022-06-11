@@ -1,5 +1,4 @@
 <div>
-
   <div id='calendar-container' wire:ignore>
     <div id='calendar'></div>
   </div>
@@ -11,7 +10,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     var Calendar = FullCalendar.Calendar;
     var calendarEl = document.getElementById('calendar');
-
 
     // initialize the calendar
     // -----------------------------------------------------------------
@@ -25,15 +23,18 @@ document.addEventListener('DOMContentLoaded', function() {
     initialView: 'timeGridWeek',
     editable: true,
     droppable: true, // this allows things to be dropped onto the calendar
-    events:'/source'
-   
-        
+    events:'/events',
+    eventClick:function(info){
+      Livewire.emit('openModal', 'update-lesson',{"eventId":info.event.id})      
+    }   
     });
 
-  
-
-
     calendar.render();
+    
+
+    @this.on(`refreshCalendar`, () => {
+            calendar.refetchEvents()
+        })
 
 });
 

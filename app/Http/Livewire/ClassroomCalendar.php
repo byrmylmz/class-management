@@ -6,46 +6,14 @@ use Livewire\Component;
 
 class ClassroomCalendar extends Component
 {   
-    public $name = 'Barry';
-    public $events = [];
+    protected $listeners=['classroom-calendar'=>'refreshCalendar'];
+    public $eventId = ['eventId'=>'2'];
 
-    public function updatedName()
+    public function refreshCalendar()
     {
         $this->emit("refreshCalendar");
     }
-    
-    public function getNamesProperty()
-    {
-      return [
-        'Barry',
-        'Taylor',
-        'Caleb',
-      ];
-    }
 
-    public function getTasksProperty()
-    {
-        switch ($this->name) {
-          case 'Barry':
-            return ['Debugbar', 'IDE Helper'];
-          case 'Taylor':
-            return ['Laravel', 'Jetstream'];
-          case 'Caleb':
-            return ['Livewire', 'Sushi'];  
-        }
-
-        return [];
-    }
-
-    public function eventReceive($event)
-    {
-        $this->events[] = 'eventReceive: ' . print_r($event, true);
-    }
-
-    public function eventDrop($event, $oldEvent)
-    {
-      $this->events[] = 'eventDrop: ' . print_r($oldEvent, true) . ' -> ' . print_r($event, true);
-    }
 
     public function render()
     {

@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\ClassroomController;
-use App\Http\Controllers\LessonController;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LessonController;
+use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+   Route::Get('/events',[EventController::class,'index'])->name('events');
     
     // Classroom
     Route::Get('/classroom',[ClassroomController::class,'index'])->name('classroom');

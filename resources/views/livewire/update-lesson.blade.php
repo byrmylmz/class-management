@@ -1,24 +1,28 @@
 
 <div class="z-5 overflow-visible">
-    <form wire:submit.prevent='save'>
-    <x-card title="Ders Ekle" blur >
+    <form wire:submit.prevent='update'>
+    <x-card title="Ders Güncelle{{$eventId}}" blur >
        
                 <div class="grid grid-flow-row gap-6">
                     <x-datetime-picker
                         label="Appointment Date" 
                         placeholder="Appointment Date" 
                         time-format='24'
-                        parse-format="YYYY-MM-DDTHH:mm:ss"
+                        timezone='turkey'
                         wire:model.defer="event.start"
+                        parse-format="YYYY-MM-DDTHH:mm:ss"
+
                         />
-                        
                         <x-datetime-picker 
                         label="Appointment Date" 
                         placeholder="Appointment Date" 
                         time-format='24'
-                        parse-format="YYYY-MM-DDTHH:mm:ss"
+                        timezone='turkey'
                         wire:model.defer="event.end"
-                    />
+                        parse-format="YYYY-MM-DDTHH:mm:ss"
+
+                        
+                        />
                     <x-input wire:model.defer='event.code' label="Ders Kodu" placeholder="Ders Kodu"/>
                     <x-input wire:model.defer='event.title' label="Ders Adı" placeholder="Ders Adı"/>       
               
@@ -33,7 +37,7 @@
      
                 <div class="flex space-x-3">
                     <x-button flat label="Cancel" wire:click="$emit('closeModal')" />
-                    <x-button primary label="Save" type='submit' />
+                    <x-button primary label="Update" type='submit' />
                 </div>
             </div>
         </x-slot>
