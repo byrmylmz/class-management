@@ -1,10 +1,12 @@
 <?php
 
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\InstructorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +58,17 @@ Route::middleware([
 
     //calendar source
     Route::Get('/source',[LessonController::class,'source'])->name('source');
+
+    //Instructors
+    Route::get('/instructor',[InstructorController::class,'index'])->name('instructor');
+
+    //Department
+    Route::get('/department',[DepartmentController::class,'index'])->name('department');
+
+    //Department
+    Route::get('/faculty',[FacultyController::class,'index'])->name('faculty.select');
+
+   
 
     Route::get('/exam', function () {
         return view('dashboard');

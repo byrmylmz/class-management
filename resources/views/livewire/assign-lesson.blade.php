@@ -5,16 +5,16 @@
        
                 <div class="grid grid-flow-row gap-6">
                     <x-datetime-picker
-                        label="Appointment Date" 
-                        placeholder="Appointment Date" 
+                        label="Başlangıç" 
+                        placeholder="Başlangıç" 
                         time-format='24'
                         parse-format="YYYY-MM-DDTHH:mm:ss"
                         wire:model.defer="event.start"
                         />
                         
                         <x-datetime-picker 
-                        label="Appointment Date" 
-                        placeholder="Appointment Date" 
+                        label="Bitiş" 
+                        placeholder="Bitiş" 
                         time-format='24'
                         parse-format="YYYY-MM-DDTHH:mm:ss"
                         wire:model.defer="event.end"

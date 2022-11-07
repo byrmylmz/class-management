@@ -89,9 +89,7 @@ final class LessonTable extends PowerGridComponent
             ->addColumn('Fakülte')
             ->addColumn('Bölüm')
             ->addColumn('Ders Kodu')
-            ->addColumn('Ders Adı')
-            ->addColumn('1. Öğretim Elemanı')
-            ->addColumn('2. Öğretim Elemanı');
+            ->addColumn('Ders Adı');
     }
 
     /*
@@ -132,13 +130,6 @@ final class LessonTable extends PowerGridComponent
                 ->sortable()
                 ->bodyAttribute(''),
 
-            Column::make('1. Öğretim Elemanı', 'first_teacher')
-                ->searchable()
-                ->sortable(),
-
-            Column::make('2. Öğretim Elemanı', 'second_teacher')
-                ->searchable()
-                ->sortable(),
 
         ];
     }

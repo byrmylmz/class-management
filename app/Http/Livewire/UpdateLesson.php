@@ -32,7 +32,6 @@ class UpdateLesson extends ModalComponent
 
         $this->closeModal();
 
-
         $this->emit('classroom-calendar');
 
     }

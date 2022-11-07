@@ -1,12 +1,12 @@
 
 <div class="z-5 overflow-visible">
     <form wire:submit.prevent='update'>
-    <x-card title="Ders Güncelle{{$eventId}}" blur >
+    <x-card title="Ders Güncelle" blur >
        
                 <div class="grid grid-flow-row gap-6">
                     <x-datetime-picker
-                        label="Appointment Date" 
-                        placeholder="Appointment Date" 
+                        label="Başlangıç" 
+                        placeholder="Başlangıç" 
                         time-format='24'
                         timezone='turkey'
                         wire:model.defer="event.start"
@@ -14,8 +14,8 @@
 
                         />
                         <x-datetime-picker 
-                        label="Appointment Date" 
-                        placeholder="Appointment Date" 
+                        label="Bitiş" 
+                        placeholder="Bitiş" 
                         time-format='24'
                         timezone='turkey'
                         wire:model.defer="event.end"

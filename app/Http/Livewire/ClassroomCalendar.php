@@ -7,6 +7,7 @@ use Livewire\Component;
 class ClassroomCalendar extends Component
 {   
     protected $listeners=['classroom-calendar'=>'refreshCalendar'];
+    
     public $eventId = ['eventId'=>'2'];
 
     public function refreshCalendar()
