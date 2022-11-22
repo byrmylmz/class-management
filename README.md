@@ -1,3 +1,8 @@
+
+# Class Management Application
+
+
+
 <img width="1552" alt="image" src="https://user-images.githubusercontent.com/68708205/203372232-4f6f155a-57ed-49b0-9bff-add546d21fdc.png">
 <img width="1552" alt="image" src="https://user-images.githubusercontent.com/68708205/203372648-52af1a73-8f09-4583-9d50-01ff9e303bd3.png">
 <img width="1552" alt="image" src="https://user-images.githubusercontent.com/68708205/203372769-49046bf3-963a-4485-8dc9-f561286cb6fb.png">
